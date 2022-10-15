@@ -7,7 +7,9 @@ from datetime import datetime
 import time
 import re
 
-class VisaBot():
+
+
+class Account():
     """
     Object handle the webdriver session which perform the automated actions
 
@@ -22,8 +24,8 @@ class VisaBot():
 
         # functions
         self.login()
-        #WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".application.attend_appointment.card.success")))
-        self.list_customers()
+        customers = self.list_customers()
+        self.reschedule_customers(customers)
         time.sleep(10)
         self.driver.close()
 
@@ -86,7 +88,6 @@ class VisaBot():
         return date,location
 
 
-
     def list_customers(self):
         """
         Get all customers details under the selected account.
@@ -97,7 +98,7 @@ class VisaBot():
         :location: (str) Tel Aviv or Jerusalem
         """
 
-
+        customers_details = []
         customers = self.driver.find_elements(By.CSS_SELECTOR, ".application.attend_appointment.card.success")
         for customer in customers:
             url = customer.find_element(By.CSS_SELECTOR, ".button.primary.small").get_attribute("href")
@@ -106,7 +107,31 @@ class VisaBot():
             current_date,location = self.parse_date(current_appointment)
 
             print("Name: {}, Date: {}, Location: {}, URL: {}".format(name,current_date,location,url))
-        
+            customers_details.append({"name": name, "date": current_date, "location":location, "url":url})
+        return(customers_details)
+
+
+    def reschedule_customers(self, customers):
+        for customer in customers:
+            Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+
+
+class Customer():
+    def __init__(self, driver, name, date, location, url):
+        # attributes
+        self.driver = driver
+        self.name = name
+        self.date = date
+        self.location = location
+        self.url = url
+
+        #functions
+        self.reschedule()
+    
+
+    def reschedule(self):
+        self.driver.get(self.url)
+
 
 if __name__ == '__main__':
-    robot = VisaBot("afikbh229@gmail.com","*********")
+    robot = Account("afikbh229@gmail.com","************")
