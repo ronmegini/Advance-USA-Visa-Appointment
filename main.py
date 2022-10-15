@@ -109,4 +109,4 @@ class VisaBot():
         
 
 if __name__ == '__main__':
-    robot = VisaBot("afikbh229@gmail.com","Afikbh229")
+    robot = VisaBot("afikbh229@gmail.com","*********")
