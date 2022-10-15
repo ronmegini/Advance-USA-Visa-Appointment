@@ -102,7 +102,7 @@ class VisaBot():
         for customer in customers:
             url = customer.find_element(By.CSS_SELECTOR, ".button.primary.small").get_attribute("href")
             current_appointment = customer.find_element(By.CLASS_NAME, "consular-appt").text
-            #name = customer.find_element(By.CSS_SELECTOR, "table.medium-12.columns.margin-bottom-20")
+            name = customer.find_element(By.XPATH, "./table[@class='medium-12 columns margin-bottom-20']/tbody/tr/td[1]").text
             current_date,location = self.parse_date(current_appointment)
 
             print("Name: {}, Date: {}, Location: {}, URL: {}".format(name,current_date,location,url))
