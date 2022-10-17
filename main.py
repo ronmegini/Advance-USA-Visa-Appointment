@@ -130,8 +130,38 @@ class Customer():
     
 
     def reschedule(self):
+        
+        DATE_FOUND = False
+        
         self.driver.get(self.url)
+        self.driver.find_element(By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/a").click()
+        WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/div/div/div[2]/p[2]/a")))
+        self.driver.find_element(By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/div/div/div[2]/p[2]/a").click()
+        
+        
+        # V under delelopment V
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH('//a[contains(@href,"#select")]'))))
+        print(self.driver.find_element(By.XPATH('//a[contains(@href,"#select")]')))
+        dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table")
+        self.find_date(dates_table)
+        #while DATE_FOUND == False:
+        #    dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table/")
+        #    self.find_date(dates_table)
+
+    def find_date(self, table):
+        free_dates = table.find_elements(By.XPATH("//td[@_data-handler='selectDay']"))
+        for date in free_dates:
+            year = date.get_attribute("data-year")
+            month = date.get_attribute("data-month")
+            day = date.find_elements(By.CLASS_NAME("ui-state-default")).text
+            print("Free date: year={}, month={}, day={}".format(year,month,day))
+        return None
+
+
+        
+
+#<td class=" undefined" data-handler="selectDay" data-event="click" data-month="3" data-year="2023"><a class="ui-state-default" href="#">27</a></td>
 
 
 if __name__ == '__main__':
-    robot = Account("afikbh229@gmail.com","************")
+    robot = Account("afikbh229@gmail.com","***********")
