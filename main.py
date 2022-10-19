@@ -216,4 +216,4 @@ class Customer():
     
 
 if __name__ == '__main__':
-    robot = Account("afikbh229@gmail.com","Afikbh229")
+    robot = Account("afikbh229@gmail.com","************")
