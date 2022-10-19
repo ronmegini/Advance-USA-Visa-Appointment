@@ -3,6 +3,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import Select
 from datetime import datetime
 import time
 import re
@@ -27,7 +28,7 @@ class Account():
         customers = self.list_customers()
         self.reschedule_customers(customers)
         time.sleep(10)
-        self.driver.close()
+        #self.driver.close()
 
 
     def login(self):
@@ -117,51 +118,88 @@ class Account():
 
 
 class Customer():
-    def __init__(self, driver, name, date, location, url):
+    """
+    Object handle each customer inside the account and find the earlier appointment time
+
+    :param driver: (driver) selenium web driver
+    :param name: (str) the name of the customer
+    :param current_date: (datetime) the current date
+    :param location: (str) Current appointment location
+    :param url: (str) action page's url
+    """
+
+    def __init__(self, driver, name, current_date, location, url):
         # attributes
         self.driver = driver
         self.name = name
-        self.date = date
+        self.current_date = current_date
         self.location = location
         self.url = url
 
-        #functions
+        # functions
         self.reschedule()
     
 
     def reschedule(self):
+        """
+        Reschedule the appointment to the earlier time possible
+
+        :returns:
+        :new_date: (datetimer) The updated date
+        """
         
-        DATE_FOUND = False
+        found_date = False
         
         self.driver.get(self.url)
         self.driver.find_element(By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/a").click()
-        WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/div/div/div[2]/p[2]/a")))
-        self.driver.find_element(By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/div/div/div[2]/p[2]/a").click()
+        WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/div/div/div[2]/p[2]/a"))).click()
         
+        WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li'))).click()
         
-        # V under delelopment V
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH('//a[contains(@href,"#select")]'))))
-        print(self.driver.find_element(By.XPATH('//a[contains(@href,"#select")]')))
+        # Iterate over the dates table to find free date
         dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table")
-        self.find_date(dates_table)
-        #while DATE_FOUND == False:
-        #    dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table/")
-        #    self.find_date(dates_table)
+        found_date = self.find_date(dates_table)
+
+        while found_date == False:
+            self.driver.find_element(By.XPATH, "/html/body/div[5]/div[2]/div/a").click()
+            dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table/tbody")
+            found_date = self.find_date(dates_table)
+
+        print("Earlier date found: {}".format(found_date[0]))
+        found_date[1].click()
+
+
+        # WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li/select/option[1]")))
+        #time.sleep(3)
+        #select = Select(self.driver.find_element(By.ID, 'appointments_consulate_appointment_time'))
+        #select.select_by_index(0)
+        
 
     def find_date(self, table):
-        free_dates = table.find_elements(By.XPATH("//td[@_data-handler='selectDay']"))
-        for date in free_dates:
-            year = date.get_attribute("data-year")
-            month = date.get_attribute("data-month")
-            day = date.find_elements(By.CLASS_NAME("ui-state-default")).text
-            print("Free date: year={}, month={}, day={}".format(year,month,day))
-        return None
+        """
+        Get dates table and return what is the earliest free date
 
+        Arguments:
+        :table: (selenium web object) month table
 
-        
+        :returns:
+        :date: (datetime) earliest free date
+        :date_object: (selenium web object) day feild in table
+        """
 
-#<td class=" undefined" data-handler="selectDay" data-event="click" data-month="3" data-year="2023"><a class="ui-state-default" href="#">27</a></td>
+        free_dates = table.find_elements(By.XPATH, "//td[@data-handler='selectDay']")
+        for date_object in free_dates:
+            year = date_object.get_attribute("data-year")
+            month = int(date_object.get_attribute("data-month")) + 1
+            day = date_object.find_element(By.CLASS_NAME, "ui-state-default").text
+            date_string = "{}/{}/{} 10:00:00".format(day,month,year)
+            date = datetime.strptime(date_string, '%d/%m/%Y %H:%M:%S')
+            return (date, date_object)
+
+        return False
 
 
 if __name__ == '__main__':
-    robot = Account("afikbh229@gmail.com","***********")
+    robot = Account("afikbh229@gmail.com","Afikbh229")
+
+
