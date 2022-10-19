@@ -47,7 +47,7 @@ class Account():
         actions = ActionChains(self.driver)
         actions.move_to_element(policy_field).perform()
         self.driver.execute_script("arguments[0].click();", policy_field)
-        submit = self.driver.find_element(By.NAME, "commit").click()
+        self.driver.find_element(By.NAME, "commit").click()
 
 
     def parse_date(self, raw_string):
@@ -111,9 +111,11 @@ class Account():
 
 
     def reschedule_customers(self, customers):
-        for customer in customers:
-            print("Name: {}, Date: {}, Location: {}, URL: {}".format(customer["name"],customer["date"],customer["location"],customer["url"]))
-            Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+        while True:
+            for customer in customers:
+                print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
+                Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+
 
 
 class Customer():
@@ -148,7 +150,7 @@ class Customer():
         """
         
         # Hold the earliest time found, until that false
-        found_date = False
+        DATE_FOUND = False
         
         # Open options page for the specific account
         self.driver.get(self.url)
@@ -159,20 +161,32 @@ class Customer():
         
         # Iterate over the dates table to find free date
         dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table")
-        found_date = self.find_date(dates_table)
+        DATE_FOUND = self.find_date(dates_table)
         
-        while found_date == False:
+        while DATE_FOUND == False:
             self.driver.find_element(By.XPATH, "/html/body/div[5]/div[2]/div/a").click()
             dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table/tbody")
-            found_date = self.find_date(dates_table)
+            output = self.find_date(dates_table)
+            if output is not False:
+                suggested_date, suggested_date_web_object= output
+                DATE_FOUND = True
 
-        print("Earlier date found: {}".format(found_date[0]))
-        found_date[1].click()
+        print("Earlier date found: {}".format(suggested_date.date()))
 
-        # Choose the earliest hour possible
-        select = Select(self.driver.find_element(By.ID, 'appointments_consulate_appointment_time'))
-        WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li/select/option[2]")))
-        select.select_by_index(1)
+        if suggested_date.date() < self.current_date.date():
+
+            # Pick the new date
+            suggested_date_web_object.click()
+
+            # Choose the earliest hour possible
+            select = Select(self.driver.find_element(By.ID, 'appointments_consulate_appointment_time'))
+            WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li/select/option[2]")))
+            select.select_by_index(1)
+            
+            print("The meeting was postponed to: {}".format(suggested_date.date()))
+
+        else:
+            print("Not updated. Current time: {}, suggested time: {}".format(self.current_date.date(), suggested_date.date()))
 
 
     def find_date(self, table):
@@ -194,16 +208,11 @@ class Customer():
             day = date_object.find_element(By.CLASS_NAME, "ui-state-default").text
             date_string = "{}/{}/{} 10:00:00".format(day,month,year)
             date = datetime.strptime(date_string, '%d/%m/%Y %H:%M:%S')
-            return (date, date_object)
+            return date, date_object
 
         return False
     
-    
-    def is_earlier(self, current_date, new_date):
-        pass
 
 
 if __name__ == '__main__':
     robot = Account("afikbh229@gmail.com","Afikbh229")
-
-
