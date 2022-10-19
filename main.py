@@ -173,6 +173,7 @@ class Customer():
 
         print("Earlier date found: {}".format(suggested_date.date()))
 
+        # If the suggested time is sooner than the original
         if suggested_date.date() < self.current_date.date():
 
             # Pick the new date
@@ -182,7 +183,8 @@ class Customer():
             select = Select(self.driver.find_element(By.ID, 'appointments_consulate_appointment_time'))
             WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li/select/option[2]")))
             select.select_by_index(1)
-            
+            # Don't remove comment until the product is ready for tests!!!
+            #WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.ID, "appointments_submit"))).click()
             print("The meeting was postponed to: {}".format(suggested_date.date()))
 
         else:
@@ -212,7 +214,6 @@ class Customer():
 
         return False
     
-
 
 if __name__ == '__main__':
     robot = Account("afikbh229@gmail.com","Afikbh229")
