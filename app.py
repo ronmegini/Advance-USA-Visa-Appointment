@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 import time
 import re
@@ -19,7 +20,7 @@ class Account():
     """
     def __init__(self, email, password):
         # attributes
-        self.driver = webdriver.Chrome() # Locate the right version of chromedriver in the same directory
+        self.driver = webdriver.Chrome(options=self.set_chrome_options()) # Locate the right version of chromedriver in the same directory
         #self.driver = webdriver.Remote(command_executor='http://localhost:4444')
         self.email = email
         self.password = password
@@ -30,6 +31,20 @@ class Account():
         self.reschedule_customers(customers)
         time.sleep(10)
         self.driver.close()
+
+    
+    def set_chrome_options() -> None:
+        """Sets chrome options for Selenium.
+        Chrome options for headless browser is enabled.
+        """
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_prefs = {}
+        chrome_options.experimental_options["prefs"] = chrome_prefs
+        chrome_prefs["profile.default_content_settings"] = {"images": 2}
+        return chrome_options
 
 
     def login(self):
