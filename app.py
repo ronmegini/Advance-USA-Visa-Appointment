@@ -28,7 +28,7 @@ class Account():
         customers = self.list_customers()
         self.reschedule_customers(customers)
         time.sleep(10)
-        #self.driver.close()
+        self.driver.close()
 
 
     def login(self):
@@ -184,7 +184,7 @@ class Customer():
             WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li/select/option[2]")))
             select.select_by_index(1)
             # Don't remove comment until the product is ready for tests!!!
-            #WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.ID, "appointments_submit"))).click()
+            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.ID, "appointments_submit"))).click()
             print("The meeting was postponed to: {}".format(suggested_date.date()))
 
         else:
@@ -216,4 +216,4 @@ class Customer():
     
 
 if __name__ == '__main__':
-    robot = Account("afikbh229@gmail.com","************")
+    robot = Account("afikbh229@gmail.com","***********")
