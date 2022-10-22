@@ -19,7 +19,8 @@ class Account():
     """
     def __init__(self, email, password):
         # attributes
-        self.driver = webdriver.Chrome() # Locate the right version of chromedriver in the same directory
+        #self.driver = webdriver.Chrome() # Locate the right version of chromedriver in the same directory
+        self.driver = webdriver.Remote(command_executor='http://localhost:4444')
         self.email = email
         self.password = password
 
