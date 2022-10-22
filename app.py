@@ -232,4 +232,5 @@ class Customer():
     
 
 if __name__ == '__main__':
+    print("I'm starting")
     robot = Account("afikbh229@gmail.com","***********")
