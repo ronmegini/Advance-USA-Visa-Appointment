@@ -37,6 +37,7 @@ class Account():
         """Sets chrome options for Selenium.
         Chrome options for headless browser is enabled.
         """
+        print("set_chrome_options")
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
@@ -54,6 +55,7 @@ class Account():
 
         :returns: None
         """
+        print("login")
         self.driver.get("https://ais.usvisa-info.com/he-il/niv/users/sign_in")
         email_field = self.driver.find_element(By.ID, "user_email")
         email_field.send_keys(self.email)
@@ -76,7 +78,7 @@ class Account():
         :date: (datetime) date of the original appointment
         :location: (str) Tel Aviv or Jerusalem
         """
-        
+        print("parse_date")
         MONTHS = {
             'ינואר': 'Jan',
             'פברואר': 'Feb',
@@ -114,7 +116,7 @@ class Account():
         :current_date: (datetime) date of the original appointment
         :location: (str) Tel Aviv or Jerusalem
         """
-
+        print("list_customers")
         customers_details = []
         customers = self.driver.find_elements(By.CSS_SELECTOR, ".application.attend_appointment.card.success")
         for customer in customers:
@@ -164,7 +166,7 @@ class Customer():
         :returns:
         :new_date: (datetimer) The updated date
         """
-        
+        print("reschedule")
         # Hold the earliest time found, until that false
         DATE_FOUND = False
         
@@ -218,7 +220,7 @@ class Customer():
         :date: (datetime) earliest free date
         :date_object: (selenium web object) day feild in table
         """
-
+        print("find_date")
         free_dates = table.find_elements(By.XPATH, "//td[@data-handler='selectDay']")
         for date_object in free_dates:
             year = date_object.get_attribute("data-year")
@@ -233,4 +235,4 @@ class Customer():
 
 if __name__ == '__main__':
     print("I'm starting")
-    robot = Account("afikbh229@gmail.com","***********")
+    robot = Account("afikbh229@gmail.com","Afikbh229")
