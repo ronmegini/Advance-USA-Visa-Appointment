@@ -33,7 +33,7 @@ class Account():
         self.driver.close()
 
     
-    def set_chrome_options() -> None:
+    def set_chrome_options(self) -> None:
         """Sets chrome options for Selenium.
         Chrome options for headless browser is enabled.
         """
