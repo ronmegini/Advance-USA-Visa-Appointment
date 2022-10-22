@@ -5,6 +5,7 @@ ADD . .
 
 # Install pip
 USER root
+RUN sudo apt-get update
 RUN sudo apt-get install software-properties-common
 RUN sudo apt-add-repository universe
 RUN sudo apt-get update
