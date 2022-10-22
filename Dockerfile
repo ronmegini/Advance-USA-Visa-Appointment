@@ -9,7 +9,7 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y software-properties-common
 RUN sudo apt-add-repository universe
 RUN sudo apt-get update
-RUN sudo apt-get install python3-pip
+RUN sudo apt-get install -y python3-pip
 #RUN wget https://bootstrap.pypa.io/get-pip.py
 #RUN python3 get-pip.py
 RUN pip3 install -r requirements.txt
