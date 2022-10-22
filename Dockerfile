@@ -16,4 +16,4 @@ RUN pip3 install -r requirements.txt
 USER 1001
 
 # Run the program
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
