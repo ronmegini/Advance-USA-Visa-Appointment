@@ -236,7 +236,7 @@ class Customer():
 
 if __name__ == '__main__':
     print("I'm starting")
-    print("start pipeline v2")
+    print("start pipeline v3")
     EMAIL = os.getenv('VISA_EMAIL')
     PASSWORD = os.getenv('VISA_PASSWORD')
     robot = Account(EMAIL,PASSWORD)
