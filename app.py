@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 import time
 import re
+import os
 
 
 
@@ -235,4 +236,6 @@ class Customer():
 
 if __name__ == '__main__':
     print("I'm starting")
-    robot = Account("afikbh229@gmail.com","Afikbh229")
+    EMAIL = os.getenv('VISA_EMAIL')
+    PASSWORD = os.getenv('VISA_PASSWORD')
+    robot = Account(EMAIL,PASSWORD)
