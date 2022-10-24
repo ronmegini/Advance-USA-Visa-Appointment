@@ -19,10 +19,9 @@ class Account():
     :param email: (str) email used for login
     :param password: (str) password used for login
     """
-    def __init__(self, email, password):
+    def __init__(self, driver, email, password):
         # attributes
-        self.driver = webdriver.Chrome(options=self.set_chrome_options()) # Locate the right version of chromedriver in the same directory
-        #self.driver = webdriver.Remote(command_executor='http://localhost:4444')
+        self.driver = driver
         self.email = email
         self.password = password
 
@@ -33,21 +32,6 @@ class Account():
         time.sleep(10)
         self.driver.close()
 
-    
-    def set_chrome_options(self) -> None:
-        """Sets chrome options for Selenium.
-        Chrome options for headless browser is enabled.
-        """
-        print("set_chrome_options")
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_prefs = {}
-        chrome_options.experimental_options["prefs"] = chrome_prefs
-        chrome_prefs["profile.default_content_settings"] = {"images": 2}
-        return chrome_options
-
 
     def login(self):
         """
@@ -56,6 +40,7 @@ class Account():
 
         :returns: None
         """
+        
         print("login")
         self.driver.get("https://ais.usvisa-info.com/he-il/niv/users/sign_in")
         email_field = self.driver.find_element(By.ID, "user_email")
@@ -234,8 +219,26 @@ class Customer():
         return False
     
 
+def set_chrome_options() -> None:
+    """
+    Sets chrome options for Selenium.
+    Chrome options for headless browser is enabled.
+    """
+
+    print("set_chrome_options")
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_prefs = {}
+    chrome_options.experimental_options["prefs"] = chrome_prefs
+    chrome_prefs["profile.default_content_settings"] = {"images": 2}
+    return chrome_options
+
+
 if __name__ == '__main__':
     print("I'm starting")
+    driver = webdriver.Chrome(options=set_chrome_options())
     EMAIL = os.getenv('VISA_EMAIL')
     PASSWORD = os.getenv('VISA_PASSWORD')
-    robot = Account(EMAIL,PASSWORD)
+    robot = Account(driver,EMAIL,PASSWORD)
