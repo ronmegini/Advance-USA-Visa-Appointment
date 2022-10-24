@@ -18,6 +18,9 @@ class Account():
     :param email: (str) email used for login
     :param password: (str) password used for login
     """
+
+    EMBASSY_URL = r"https://ais.usvisa-info.com/he-il/niv/users/sign_in"
+
     def __init__(self, email, password):
         # attributes
         self.driver = webdriver.Chrome() # Locate the right version of chromedriver in the same directory
@@ -40,7 +43,7 @@ class Account():
         :returns: None
         """
         print("login")
-        self.driver.get("https://ais.usvisa-info.com/he-il/niv/users/sign_in")
+        self.driver.get(self.EMBASSY_URL)
         email_field = self.driver.find_element(By.ID, "user_email")
         email_field.send_keys(self.email)
         password_field = self.driver.find_element(By.ID, "user_password")
@@ -103,6 +106,7 @@ class Account():
         print("list_customers")
         customers_details = []
         customers = self.driver.find_elements(By.CSS_SELECTOR, ".application.attend_appointment.card.success")
+        if customers == []: raise Exception("No user waiting for interview in this account")
         for customer in customers:
             url = customer.find_element(By.CSS_SELECTOR, ".button.primary.small").get_attribute("href")
             current_appointment = customer.find_element(By.CLASS_NAME, "consular-appt").text
@@ -117,6 +121,7 @@ class Account():
             for customer in customers:
                 print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
                 Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+                time.sleep(120)
 
 
 
@@ -204,6 +209,7 @@ class Customer():
         :date: (datetime) earliest free date
         :date_object: (selenium web object) day feild in table
         """
+
         print("find_date")
         free_dates = table.find_elements(By.XPATH, "//td[@data-handler='selectDay']")
         for date_object in free_dates:
@@ -218,5 +224,9 @@ class Customer():
     
 
 if __name__ == '__main__':
-    print("I'm starting")
-    robot = Account("afikbh229@gmail.com","Afikbh229")
+    try:
+        print("I'm starting")
+        robot = Account("gali_ari@yahoo.com","Ag123456")
+    except Exception as e:
+        print("Failed due to: {}".format(e))
+        
