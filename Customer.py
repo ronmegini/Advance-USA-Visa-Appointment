@@ -6,9 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime
-import time
-import re
-import os
+
 
 
 
@@ -80,6 +78,7 @@ class Customer():
             select.select_by_index(1)
             # Don't remove comment until the product is ready for tests!!!
             WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.ID, "appointments_submit"))).click()
+            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.CLASS_NAME, "button alert"))).click()
             print("The meeting was postponed to: {}".format(suggested_date.date()))
 
         else:

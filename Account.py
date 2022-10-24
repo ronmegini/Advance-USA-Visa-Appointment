@@ -21,6 +21,9 @@ class Account():
     :param email: (str) email used for login
     :param password: (str) password used for login
     """
+
+    EMBASSY_URL = r"https://ais.usvisa-info.com/he-il/niv/users/sign_in"
+
     def __init__(self, driver, email, password):
         # attributes
         self.driver = driver
@@ -42,8 +45,9 @@ class Account():
 
         :returns: None
         """
+
         print("login")
-        self.driver.get("https://ais.usvisa-info.com/he-il/niv/users/sign_in")
+        self.driver.get(self.EMBASSY_URL)
         email_field = self.driver.find_element(By.ID, "user_email")
         email_field.send_keys(self.email)
         password_field = self.driver.find_element(By.ID, "user_password")
@@ -120,3 +124,21 @@ class Account():
             for customer in customers:
                 print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
                 Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+                time.sleep(60)
+
+
+def set_chrome_options() -> None:
+    """
+    Sets chrome options for Selenium.
+    Chrome options for headless browser is enabled.
+    """
+
+    print("set_chrome_options")
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_prefs = {}
+    chrome_options.experimental_options["prefs"] = chrome_prefs
+    chrome_prefs["profile.default_content_settings"] = {"images": 2}
+    return chrome_options

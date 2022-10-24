@@ -12,6 +12,7 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y python3-pip
 RUN pip3 install -r requirements.txt
 USER 1001
+ENV CONTAINER_RUNNING=true
 
 # Run the program
 CMD ["python3", "app.py"]
