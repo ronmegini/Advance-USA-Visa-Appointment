@@ -119,4 +119,4 @@ class Account():
         while True:
             for customer in customers:
                 print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
-                Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+                Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])

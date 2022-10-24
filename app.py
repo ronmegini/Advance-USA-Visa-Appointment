@@ -5,9 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
-from datetime import datetime
-import time
-import re
 import os
 import Account
 
@@ -36,4 +33,4 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(options=set_chrome_options())
     EMAIL = os.getenv('VISA_EMAIL')
     PASSWORD = os.getenv('VISA_PASSWORD')
-    robot = Account(driver,EMAIL,PASSWORD)
+    robot = Account.Account(driver,EMAIL,PASSWORD)
