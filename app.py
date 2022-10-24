@@ -42,6 +42,7 @@ class Account():
 
         :returns: None
         """
+
         print("login")
         self.driver.get(self.EMBASSY_URL)
         email_field = self.driver.find_element(By.ID, "user_email")
@@ -65,6 +66,7 @@ class Account():
         :date: (datetime) date of the original appointment
         :location: (str) Tel Aviv or Jerusalem
         """
+
         print("parse_date")
         MONTHS = {
             'ינואר': 'Jan',
@@ -103,6 +105,7 @@ class Account():
         :current_date: (datetime) date of the original appointment
         :location: (str) Tel Aviv or Jerusalem
         """
+        
         print("list_customers")
         customers_details = []
         customers = self.driver.find_elements(By.CSS_SELECTOR, ".application.attend_appointment.card.success")
