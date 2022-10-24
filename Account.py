@@ -110,6 +110,7 @@ class Account():
         print("list_customers")
         customers_details = []
         customers = self.driver.find_elements(By.CSS_SELECTOR, ".application.attend_appointment.card.success")
+        if customers == []: raise Exception("No user waiting for interview in this account")
         for customer in customers:
             url = customer.find_element(By.CSS_SELECTOR, ".button.primary.small").get_attribute("href")
             current_appointment = customer.find_element(By.CLASS_NAME, "consular-appt").text
