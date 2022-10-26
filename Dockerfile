@@ -24,6 +24,7 @@ ADD Account.py .
 ADD Customer.py .
 USER root
 COPY --from=stageone /usr/local/lib/python3.8/dist-packages/selenium /usr/local/lib/python3.8/dist-packages/selenium
+COPY --from=stageone /usr/local/lib/python3.8/dist-packages/certifi /usr/local/lib/python3.8/dist-packages/certifi
 USER 1001
 ENV CONTAINER_RUNNING=true
 CMD ["python3", "app.py"]
