@@ -25,11 +25,12 @@ if __name__ == '__main__':
 
         if os.getenv("CONTAINER_RUNNING") == "true":
             driver,email,password = maincontainer()
-            robot = Account.Account(driver,email,password)    
+            robot = Account.Account(driver,email,password,-1)    
         else:
             driver,email,password = maindesktop()
-            robot = Account.Account(driver,email,password)
-                    
+            robot = Account.Account(driver,email,password,2400)
+    
     except Exception as e:
-        print("Failed due to: {}".format(e))
+        print("Failed due to:")
+        print(e)
     

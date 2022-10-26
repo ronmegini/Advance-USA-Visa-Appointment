@@ -38,6 +38,7 @@ class Customer():
         :returns:
         :new_date: (datetimer) The updated date
         """
+
         print("--- reschedule ---")
         # Hold the earliest time found, until that false
         DATE_FOUND = False
@@ -75,8 +76,8 @@ class Customer():
             select.select_by_index(1)
             # Don't remove comment until the product is ready for tests!!!
             WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.ID, "appointments_submit"))).click()
-            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.CLASS_NAME, "button alert"))).click()
-            print("The meeting was postponed to: {}".format(suggested_date.date()))
+            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[6]/div/div/a[2]"))).click()
+            print("Updated. The meeting was postponed to: {}".format(suggested_date.date()))
 
         else:
             print("Not updated. Current time: {}, suggested time: {}".format(self.current_date.date(), suggested_date.date()))
@@ -93,6 +94,7 @@ class Customer():
         :date: (datetime) earliest free date
         :date_object: (selenium web object) day feild in table
         """
+
         print("--- find date ---")
         free_dates = table.find_elements(By.XPATH, "//td[@data-handler='selectDay']")
         for date_object in free_dates:

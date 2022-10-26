@@ -20,11 +20,12 @@ class Account():
 
     EMBASSY_URL = r"https://ais.usvisa-info.com/he-il/niv/users/sign_in"
 
-    def __init__(self, driver, email, password):
+    def __init__(self, driver, email, password, interval):
         # attributes
         self.driver = driver
         self.email = email
         self.password = password
+        self.interval = interval
 
         # functions
         self.login()
@@ -117,11 +118,20 @@ class Account():
 
 
     def reschedule_customers(self, customers):
-        while True:
+        """
+        Loop over the customers in account. Wait for the configure interval before iterations.
+        If container run once, if desktop wait for interval.
+        
+        :customers: (dict) dict with the customer data
+        """
+        for customer in customers:
+                print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
+                Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+        while self.interval != -1 :
             for customer in customers:
                 print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
                 Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
-                time.sleep(60)
+                time.sleep(self.interval)
 
 
 def set_chrome_options() -> None:
