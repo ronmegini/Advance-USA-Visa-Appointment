@@ -1,10 +1,7 @@
-from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 
 
@@ -41,7 +38,7 @@ class Customer():
         :returns:
         :new_date: (datetimer) The updated date
         """
-        print("reschedule")
+        print("--- reschedule ---")
         # Hold the earliest time found, until that false
         DATE_FOUND = False
         
@@ -96,7 +93,7 @@ class Customer():
         :date: (datetime) earliest free date
         :date_object: (selenium web object) day feild in table
         """
-        print("find_date")
+        print("--- find date ---")
         free_dates = table.find_elements(By.XPATH, "//td[@data-handler='selectDay']")
         for date_object in free_dates:
             year = date_object.get_attribute("data-year")
