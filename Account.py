@@ -46,7 +46,7 @@ class Account():
         :returns: None
         """
 
-        print("login")
+        print("--- login ---")
         self.driver.get(self.EMBASSY_URL)
         email_field = self.driver.find_element(By.ID, "user_email")
         email_field.send_keys(self.email)
@@ -69,7 +69,7 @@ class Account():
         :date: (datetime) date of the original appointment
         :location: (str) Tel Aviv or Jerusalem
         """
-        print("parse_date")
+        print("--- parse_date ---")
         MONTHS = {
             'ינואר': 'Jan',
             'פברואר': 'Feb',
@@ -107,7 +107,7 @@ class Account():
         :current_date: (datetime) date of the original appointment
         :location: (str) Tel Aviv or Jerusalem
         """
-        print("list_customers")
+        print("--- list_customers ---")
         customers_details = []
         customers = self.driver.find_elements(By.CSS_SELECTOR, ".application.attend_appointment.card.success")
         if customers == []: raise Exception("No user waiting for interview in this account")
@@ -134,7 +134,7 @@ def set_chrome_options() -> None:
     Chrome options for headless browser is enabled.
     """
 
-    print("set_chrome_options")
+    print("--- set_chrome_options ---")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
