@@ -19,9 +19,11 @@ RUN pip3 install -r requirements.txt
 
 FROM selenium/standalone-chrome
 
-ADD . .
+ADD app.py .
+ADD Account.py .
+ADD Customer.py .
 USER root
-COPY --from=stageone /usr/local/lib/python3.8/dist-packages/selenium /usr/local/lib/python3.8/dist-packages
+COPY --from=stageone /usr/local/lib/python3.8/dist-packages/selenium /usr/local/lib/python3.8/dist-packages/selenium
 USER 1001
 ENV CONTAINER_RUNNING=true
 CMD ["python3", "app.py"]
