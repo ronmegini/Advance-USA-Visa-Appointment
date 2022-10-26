@@ -21,9 +21,7 @@ RUN pip3 install -r requirements.txt
 FROM selenium/standalone-chrome
 
 # Copy files
-ADD app.py .
-ADD Account.py .
-ADD Customer.py .
+ADD code .
 # Become root
 USER root
 # Copy python dependencies for selenium

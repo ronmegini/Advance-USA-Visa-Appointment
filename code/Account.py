@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 import re
 import os
-import Customer
+import Customer as Customer
 
 
 
