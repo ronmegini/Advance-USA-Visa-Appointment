@@ -12,7 +12,7 @@ env:
   ECS_SERVICE: usa-visa-bot
   ECS_CLUSTER: bot-network
   ECS_TASK_DEFINITION: ./aws/task-def.json
-#  CONTAINER_NAME: robi
+  CONTAINER_NAME: robi
 
 permissions:
   contents: read
@@ -55,8 +55,11 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ${{ env.ECS_TASK_DEFINITION }}
-#        container-name: ${{ env.CONTAINER_NAME }}
+        container-name: ${{ env.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
+        environment-variables: |
+            VISA_EMAIL="${{ secrets.VISA_EMAIL }}"
+            VISA_PASSWORD="${{ secrets.VISA_PASSWORD }}"
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -65,4 +68,3 @@ jobs:
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
-
