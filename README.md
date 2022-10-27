@@ -1,1 +1,3 @@
 # usa-visa
+
+enforce push
