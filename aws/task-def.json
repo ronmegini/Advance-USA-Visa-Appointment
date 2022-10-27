@@ -1,20 +1,24 @@
 {
-    "family": "usa-visa-bot", 
-    "networkMode": "awsvpc", 
-    "containerDefinitions": [
+    "Type" : "AWS::ECS::TaskDefinition",
+    "Properties" :
         {
-            "name": "usa-visa-bot", 
-            "image": "visafriends/usa-visa-bot:latest", 
-            "essential": true
+            "family": "usa-visa-bot", 
+            "networkMode": "awsvpc", 
+            "containerDefinitions": [
+                {
+                    "name": "usa-visa-bot", 
+                    "image": "visafriends/usa-visa-bot:latest", 
+                    "essential": true
+                }
+            ],
+            "runtimePlatform": {
+                "operatingSystemFamily": "LINUX"
+            },
+            "requiresCompatibilities": [
+                "FARGATE"
+            ], 
+            "cpu": "256", 
+            "memory": "512",
+            "TaskRoleArn": "arn:aws:iam::388898764431:role/ECSaccessECR"
         }
-    ],
-    "runtimePlatform": {
-        "operatingSystemFamily": "LINUX"
-    },
-    "requiresCompatibilities": [
-        "FARGATE"
-    ], 
-    "cpu": "256", 
-    "memory": "512",
-    "TaskRoleArn": "arn:aws:iam::388898764431:role/ECSaccessECR"
 }
