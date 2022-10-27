@@ -1,4 +1,4 @@
-ame: AWS Image Build & Push & Deployment
+name: AWS Image Build & Push & Deployment
 
 on:
   push:
