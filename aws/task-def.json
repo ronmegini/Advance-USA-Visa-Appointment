@@ -1,0 +1,25 @@
+{
+    "family": "usa-visa-bot", 
+    "networkMode": "awsvpc", 
+    "containerDefinitions": [
+        {
+            "name": "usa-visa-bot", 
+            "image": "visafriends/usa-visa-bot:latest", 
+            "essential": true ,
+            "environment": [
+                {
+                    "VISA_EMAIL": "${{ secrets.VISA_EMAIL }}",
+                    "VISA_PASSWORD": "${{ secrets.VISA_PASSWORD }}"
+                }
+            ]
+        }
+    ],
+    "runtimePlatform": {
+        "operatingSystemFamily": "LINUX"
+    },
+    "requiresCompatibilities": [
+        "FARGATE"
+    ], 
+    "cpu": "256", 
+    "memory": "512"
+}

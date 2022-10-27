@@ -128,10 +128,10 @@ class Account():
                 print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
                 Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
         while self.interval != -1 :
+            time.sleep(self.interval)
             for customer in customers:
                 print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
                 Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
-                time.sleep(self.interval)
 
 
 def set_chrome_options() -> None:
