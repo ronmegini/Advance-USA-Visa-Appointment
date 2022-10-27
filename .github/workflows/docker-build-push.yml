@@ -1,6 +1,6 @@
 name: Docker Image Build & Push
 
-on:
+#on:
 #  push:
 #    branches: [ "main" ]
 #  pull_request:
