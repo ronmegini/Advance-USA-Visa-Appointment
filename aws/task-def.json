@@ -16,5 +16,5 @@
     ], 
     "cpu": "256", 
     "memory": "512",
-    "TaskRoleArn": "arn:aws:iam::388898764431:role/ECSaccessECR"
+    "role": "arn:aws:iam::388898764431:role/ECSaccessECR"
 }
