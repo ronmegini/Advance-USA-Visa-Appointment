@@ -23,11 +23,11 @@
         "environment": [
           {
             "name": "VISA_EMAIL",
-            "value": ""
+            "value": null
           },
           {
             "name": "VISA_PASSWORD",
-            "value": ""
+            "value": null
           }
         ],
         "resourceRequirements": null,
