@@ -56,9 +56,6 @@ jobs:
         task-definition: ${{ env.ECS_TASK_DEFINITION }}
         container-name: ${{ env.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
-        environment-variables: |
-            VISA_EMAIL="${{ secrets.VISA_EMAIL }}"
-            VISA_PASSWORD="${{ secrets.VISA_PASSWORD }}"
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
