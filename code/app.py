@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
         if os.getenv("CONTAINER_RUNNING") == "true":
             driver,email,password = maincontainer()
+            print("{},{}".format(email,password))
             robot = Account.Account(driver,email,password,-1)    
         else:
             driver,email,password = maindesktop()
@@ -33,6 +34,6 @@ if __name__ == '__main__':
     except Exception as e:
         print("Failed due to:")
         print(e)
-        print("HTML page after when failed:")
+        print("HTML page when failed:")
         print(driver.page_source)
     
