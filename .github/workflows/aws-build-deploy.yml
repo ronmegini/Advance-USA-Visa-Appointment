@@ -9,7 +9,7 @@ on:
 env:
   AWS_REGION: us-east-1 
   ECR_REPOSITORY: usa-visa-bot
-  ECS_SERVICE: usa-visa-bot
+  #ECS_SERVICE: usa-visa-bot
   ECS_CLUSTER: bot-network
   ECS_TASK_DEFINITION: ./aws/task-def.json
   CONTAINER_NAME: usa-visa-bot
@@ -65,6 +65,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ env.ECS_SERVICE }}
+        #service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
