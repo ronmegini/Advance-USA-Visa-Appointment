@@ -18,9 +18,7 @@
         "entryPoint": null,
         "portMappings": [
           {
-            "ContainerPort": 7900,
-            "HostPort": 7900,
-            "Protocol": "tcp"
+            "ContainerPort": 7900
           }
         ],
         "command": null,
@@ -130,7 +128,7 @@
     "requiresCompatibilities": [
       "FARGATE"
     ],
-    "networkMode": "Bridge",
+    "networkMode": "awsvpc",
     "runtimePlatform": {
       "operatingSystemFamily": "LINUX",
       "cpuArchitecture": null
