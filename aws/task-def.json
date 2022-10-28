@@ -19,8 +19,7 @@
         "portMappings": [
           {
             "ContainerPort" : 7900,
-            "HostPort" : 7900,
-            "Protocol" : "tcp"
+            "HostPort" : 7900
           }
         ],
         "command": null,
