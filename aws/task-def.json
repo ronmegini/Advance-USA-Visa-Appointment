@@ -18,8 +18,9 @@
         "entryPoint": null,
         "portMappings": [
           {
-            "ContainerPort" : 7900,
-            "HostPort" : 7900
+            "ContainerPort": 7900,
+            "HostPort": 7900,
+            "Protocol": "tcp"
           }
         ],
         "command": null,
@@ -67,7 +68,7 @@
       }
     ],
     "placementConstraints": [],
-    "memory": "512",
+    "memory": "1024",
     "taskRoleArn": null,
     "compatibilities": [
       "EC2",
@@ -134,7 +135,7 @@
       "operatingSystemFamily": "LINUX",
       "cpuArchitecture": null
     },
-    "cpu": "256",
+    "cpu": "512",
     "revision": 4,
     "status": "ACTIVE",
     "inferenceAccelerators": null,
