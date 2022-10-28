@@ -16,7 +16,13 @@
           }
         },
         "entryPoint": null,
-        "portMappings": [],
+        "portMappings": [
+          {
+            "ContainerPort" : 7900,
+            "HostPort" : 7900,
+            "Protocol" : "tcp"
+          }
+        ],
         "command": null,
         "linuxParameters": null,
         "cpu": 0,
@@ -41,7 +47,7 @@
         "memoryReservation": null,
         "volumesFrom": [],
         "stopTimeout": null,
-        "image": "388898764431.dkr.ecr.us-east-1.amazonaws.com/usa-visa-bot:1154f3d39953a13c1f34174950e571385e0b6588",
+        "image": null,
         "startTimeout": null,
         "firelensConfiguration": null,
         "dependsOn": null,

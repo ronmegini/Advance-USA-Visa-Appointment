@@ -25,7 +25,6 @@ if __name__ == '__main__':
 
         if os.getenv("CONTAINER_RUNNING") == "true":
             driver,email,password = maincontainer()
-            print("{},{}".format(email,password))
             robot = Account.Account(driver,email,password,-1)    
         else:
             driver,email,password = maindesktop()
