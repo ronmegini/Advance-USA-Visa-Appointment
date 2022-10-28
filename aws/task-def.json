@@ -130,7 +130,7 @@
     "requiresCompatibilities": [
       "FARGATE"
     ],
-    "networkMode": "awsvpc",
+    "networkMode": "Bridge",
     "runtimePlatform": {
       "operatingSystemFamily": "LINUX",
       "cpuArchitecture": null
