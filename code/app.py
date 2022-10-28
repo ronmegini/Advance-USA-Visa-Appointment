@@ -33,4 +33,6 @@ if __name__ == '__main__':
     except Exception as e:
         print("Failed due to:")
         print(e)
+        print("HTML page after when failed:")
+        print(driver.page_source)
     

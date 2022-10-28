@@ -1,20 +1,138 @@
 {
-    "family": "usa-visa-bot", 
-    "networkMode": "awsvpc", 
+    "ipcMode": null,
+    "executionRoleArn": "arn:aws:iam::388898764431:role/ECSaccessECR",
     "containerDefinitions": [
-        {
-            "name": "usa-visa-bot", 
-            "image": "visafriends/usa-visa-bot:latest", 
-            "essential": true
-        }
+      {
+        "dnsSearchDomains": null,
+        "environmentFiles": null,
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "secretOptions": null,
+          "options": {
+            "awslogs-group": "visa-bot-logs",
+            "awslogs-region": "us-east-1",
+            "awslogs-create-group": "true",
+            "awslogs-stream-prefix": "awslogs-example"
+          }
+        },
+        "entryPoint": null,
+        "portMappings": [],
+        "command": null,
+        "linuxParameters": null,
+        "cpu": 0,
+        "environment": [
+          {
+            "name": "VISA_EMAIL",
+            "value": "\"\""
+          },
+          {
+            "name": "VISA_PASSWORD",
+            "value": "\"\""
+          }
+        ],
+        "resourceRequirements": null,
+        "ulimits": null,
+        "dnsServers": null,
+        "mountPoints": [],
+        "workingDirectory": null,
+        "secrets": null,
+        "dockerSecurityOptions": null,
+        "memory": null,
+        "memoryReservation": null,
+        "volumesFrom": [],
+        "stopTimeout": null,
+        "image": "388898764431.dkr.ecr.us-east-1.amazonaws.com/usa-visa-bot:1154f3d39953a13c1f34174950e571385e0b6588",
+        "startTimeout": null,
+        "firelensConfiguration": null,
+        "dependsOn": null,
+        "disableNetworking": null,
+        "interactive": null,
+        "healthCheck": null,
+        "essential": true,
+        "links": null,
+        "hostname": null,
+        "extraHosts": null,
+        "pseudoTerminal": null,
+        "user": null,
+        "readonlyRootFilesystem": null,
+        "dockerLabels": null,
+        "systemControls": null,
+        "privileged": null,
+        "name": "usa-visa-bot"
+      }
     ],
-    "runtimePlatform": {
-        "operatingSystemFamily": "LINUX"
-    },
-    "requiresCompatibilities": [
-        "FARGATE"
-    ], 
-    "cpu": "256", 
+    "placementConstraints": [],
     "memory": "512",
-    "executionRoleArn": "arn:aws:iam::388898764431:role/ECSaccessECR"
-}
+    "taskRoleArn": null,
+    "compatibilities": [
+      "EC2",
+      "FARGATE"
+    ],
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:388898764431:task-definition/usa-visa-bot:4",
+    "family": "usa-visa-bot",
+    "requiresAttributes": [
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "ecs.capability.execution-role-awslogs"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "com.amazonaws.ecs.capability.ecr-auth"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "ecs.capability.execution-role-ecr-pull"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "ecs.capability.task-eni"
+      },
+      {
+        "targetId": null,
+        "targetType": null,
+        "value": null,
+        "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+      }
+    ],
+    "pidMode": null,
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "runtimePlatform": {
+      "operatingSystemFamily": "LINUX",
+      "cpuArchitecture": null
+    },
+    "cpu": "256",
+    "revision": 4,
+    "status": "ACTIVE",
+    "inferenceAccelerators": null,
+    "proxyConfiguration": null,
+    "volumes": []
+  }
