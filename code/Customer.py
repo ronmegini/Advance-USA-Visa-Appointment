@@ -77,10 +77,10 @@ class Customer():
             # Don't remove comment until the product is ready for tests!!!
             WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.ID, "appointments_submit"))).click()
             WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[6]/div/div/a[2]"))).click()
-            print("Updated. The meeting was postponed to: {}".format(suggested_date.date()))
+            print("Updated - The meeting rescheduled from: {}, to: {}".format(self.current_date.date(),suggested_date.date()))
 
         else:
-            print("Not updated. Current time: {}, suggested time: {}".format(self.current_date.date(), suggested_date.date()))
+            print("Not updated - Current time: {}, suggested time: {}".format(self.current_date.date(), suggested_date.date()))
 
 
     def find_date(self, table):
