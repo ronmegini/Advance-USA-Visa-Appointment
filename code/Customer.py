@@ -1,3 +1,4 @@
+from os import times_result
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -59,13 +60,12 @@ class Customer():
         print(self.accepted_location)
         for location in self.accepted_location:
             
+            time.sleep(1)
             print("Current location looking for: {}".format(location))
-            # Choose location
-            #Select(self.driver.find_element(By.ID,'appointments_consulate_appointment_facility_id')).select_by_visible_text(location)
-            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[1]/div/li/select/option[normalize-space(text())="{}"]'.format(location)))).click()
-            time.sleep(5)
-
             
+            # Choose location
+            Select(self.driver.find_element(By.ID,'appointments_consulate_appointment_facility_id')).select_by_visible_text(location)
+
             # Get into free dates table
             WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li'))).click()
             
@@ -98,11 +98,8 @@ class Customer():
                 break
 
             else:
+                suggested_date_web_object.click()
                 print("Not updated - Current time: {}, suggested time: {}".format(self.current_date.date(), suggested_date.date()))
-
-
-    def fill_form():
-        pass
 
 
     def find_date(self, table):
