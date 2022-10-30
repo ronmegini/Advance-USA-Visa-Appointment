@@ -1,4 +1,4 @@
-name: Testing Workflow
+name: AWS Image Build & Push & Deployment
 
 on:
   push:
