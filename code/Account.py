@@ -20,12 +20,13 @@ class Account():
 
     EMBASSY_URL = r"https://ais.usvisa-info.com/he-il/niv/users/sign_in"
 
-    def __init__(self, driver, email, password, interval):
+    def __init__(self, driver, email, password, interval, accepted_location):
         # attributes
         self.driver = driver
         self.email = email
         self.password = password
         self.interval = interval
+        self.accepted_location = accepted_location
 
         # functions
         self.login()
@@ -125,13 +126,13 @@ class Account():
         :customers: (dict) dict with the customer data
         """
         for customer in customers:
-                print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
-                Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+                print("Name: {}, Date: {}, Location: {}, accepted_location: {}".format(customer["name"],customer["date"],customer["location"],self.accepted_location))
+                Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"], self.accepted_location)
         while self.interval != -1 :
             time.sleep(self.interval)
             for customer in customers:
-                print("Name: {}, Date: {}, Location: {}".format(customer["name"],customer["date"],customer["location"]))
-                Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"])
+                print("Name: {}, Date: {}, Location: {}, accepted_location: {}".format(customer["name"],customer["date"],customer["location"],self.accepted_location))
+                Customer.Customer(self.driver, customer["name"], customer["date"], customer["location"], customer["url"], self.accepted_location)
 
 
 def set_chrome_options() -> None:
