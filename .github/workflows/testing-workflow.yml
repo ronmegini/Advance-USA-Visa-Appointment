@@ -3,6 +3,8 @@ name: Testing Workflow
 on:
   push:
     branches: [ "testing" ]
+  pull_request:
+    branches: [ "testing" ]
 
 permissions:
   contents: read
