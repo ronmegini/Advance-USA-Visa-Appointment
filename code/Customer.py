@@ -57,7 +57,6 @@ class Customer():
         self.driver.find_element(By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/a").click()
         WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[4]/main/div[2]/div[2]/div/section/ul/li[3]/div/div/div[2]/p[2]/a"))).click()
         
-        print(self.accepted_location)
         for location in self.accepted_location:
             
             time.sleep(1)
@@ -112,7 +111,7 @@ class Customer():
         :returns:
         :date: (datetime) earliest free date
         :date_object: (selenium web object) day feild in table
-        """
+        """ 
 
         print("--- find date ---")
         free_dates = table.find_elements(By.XPATH, "//td[@data-handler='selectDay']")
