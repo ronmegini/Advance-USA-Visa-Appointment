@@ -28,4 +28,4 @@ jobs:
 
     - name: Test container
       id: test
-      run: docker run -it -e VISA_EMAIL=${{ secrets.TEST_USER }} -e VISA_PASSWORD=${{ secrets.TEST_PASSWORD }}6 visafriends/usa-visa-bot:debug
+      run: docker run -e VISA_EMAIL=${{ secrets.TEST_USER }} -e VISA_PASSWORD=${{ secrets.TEST_PASSWORD }} visafriends/usa-visa-bot:debug
