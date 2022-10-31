@@ -63,7 +63,7 @@
     ],
     "placementConstraints": [],
     "memory": "512",
-    "taskRoleArn": "ggenkin@iai.co.il",
+    "taskRoleArn": "arn:aws:iam::388898764431:role/visa-bot-role",
     "compatibilities": [
       "EC2",
       "FARGATE"
