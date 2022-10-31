@@ -28,6 +28,10 @@
           {
             "name": "VISA_PASSWORD",
             "value": null
+          },
+          {
+            "name": "ACCEPTED_LOCATION",
+            "value": null
           }
         ],
         "resourceRequirements": null,
