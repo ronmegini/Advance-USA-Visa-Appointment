@@ -26,6 +26,8 @@ ADD code .
 USER root
 # Copy python dependencies for selenium
 COPY --from=stageone /usr/local/lib/python3.8/dist-packages/ /usr/local/lib/python3.8/dist-packages/
+COPY --from=stageone /usr/lib/python3/dist-packages /usr/local/lib/python3.8/dist-packages/
+
 # Change back to weak user
 USER 1001
 # What is the running environmnent
