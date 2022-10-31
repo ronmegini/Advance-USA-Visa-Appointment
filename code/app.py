@@ -1,11 +1,11 @@
 from selenium import webdriver
 import os
 import Account
-
+import utils
 
 def maindesktop():
     email = input("Email: ")
-    password = input("Password: ")
+    password = utils.get_secret(email,'password')
     accepted_location = input("Accepted Location: ")
     driver = webdriver.Chrome()
     return(driver,email,password,accepted_location)
@@ -13,9 +13,9 @@ def maindesktop():
 
 def maincontainer():
     email = os.getenv('VISA_EMAIL')
-    password = os.getenv('VISA_PASSWORD')
+    password = utils.get_secret(email,'password')
     accepted_location = os.getenv('ACCEPTED_LOCATION')
-    driver = webdriver.Chrome(options=Account.set_chrome_options())
+    driver = webdriver.Chrome(options=utils.set_chrome_options())
     return(driver,email,password,accepted_location)
 
 
