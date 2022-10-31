@@ -1,6 +1,6 @@
 {
     "ipcMode": null,
-    "executionRoleArn": "arn:aws:iam::388898764431:role/ECSaccessECR",
+    "executionRoleArn": "arn:aws:iam::388898764431:role/visa-bot-role",
     "containerDefinitions": [
       {
         "dnsSearchDomains": null,
