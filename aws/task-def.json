@@ -63,7 +63,7 @@
     ],
     "placementConstraints": [],
     "memory": "512",
-    "taskRoleArn": null,
+    "taskRoleArn": "ggenkin@iai.co.il",
     "compatibilities": [
       "EC2",
       "FARGATE"
