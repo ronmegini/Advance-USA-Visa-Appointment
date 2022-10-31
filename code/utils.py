@@ -50,12 +50,8 @@ def get_secret(secret_name, key):
         raise e
 
     # Decrypts secret using the associated KMS key.
-    print(get_secret_value_response)
     secret = get_secret_value_response['SecretString']
-    print(secret)
     secret = json.loads(secret)
-    print(secret)
     value = secret[key]
-    print(value)
     
     return value
