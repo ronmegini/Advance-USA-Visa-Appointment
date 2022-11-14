@@ -20,7 +20,7 @@ class Account():
 
     EMBASSY_URL = r"https://ais.usvisa-info.com/he-il/niv/users/sign_in"
 
-    def __init__(self, driver, email, password, interval, accepted_location):
+    def __init__(self, driver, email, password, interval, accepted_location, runon):
         # attributes
         self.driver = driver
         self.email = email
@@ -31,6 +31,8 @@ class Account():
         # functions
         self.login()
         customers = self.list_customers()
+        if runon != "all":
+            customers = [customer for customer in customers if customer['name'] == runon]
         self.reschedule_customers(customers)
         time.sleep(10)
         self.driver.close()
