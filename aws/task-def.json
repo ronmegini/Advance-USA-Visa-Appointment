@@ -27,7 +27,11 @@
           },
           {
             "name": "ACCEPTED_LOCATION",
-            "value": null
+            "value": "any"
+          },
+          {
+            "name": "RUN_ON",
+            "value": "all"
           }
         ],
         "resourceRequirements": null,
