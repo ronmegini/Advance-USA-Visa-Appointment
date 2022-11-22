@@ -66,8 +66,9 @@ class Customer():
             Select(self.driver.find_element(By.ID,'appointments_consulate_appointment_facility_id')).select_by_visible_text(location)
 
             # Get into free dates table
-            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li'))).click()
-            
+            table = WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/main/div[4]/div/div/form/fieldset/ol/fieldset/div/div[2]/div[3]/li')))
+            time.sleep(0.5)
+            table.click()
             # Iterate over the dates table to find free date
             dates_table = self.driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/table")
             DATE_FOUND = self.find_date(dates_table)

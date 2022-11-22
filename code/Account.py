@@ -4,8 +4,10 @@ from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 import time
 import re
-import os
 import Customer as Customer
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 
@@ -57,7 +59,8 @@ class Account():
         actions.move_to_element(policy_field).perform()
         self.driver.execute_script("arguments[0].click();", policy_field)
         self.driver.find_element(By.NAME, "commit").click()
-
+        # wait for next page
+        WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.CLASS_NAME, "status")))
 
     def parse_date(self, raw_string):
         """

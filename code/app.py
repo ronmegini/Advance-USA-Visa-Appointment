@@ -6,7 +6,7 @@ import utils
 def maindesktop():
     email = input("Email: ")
     password = input("Password: ")
-    accepted_location = input("Accepted Location: ")
+    accepted_location = input("Accepted Location (or 'any'): ")
     runon = input("Specific user in account (or 'all'): ")
     driver = webdriver.Chrome()
     return(driver,email,password,accepted_location,runon)
