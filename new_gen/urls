@@ -1,0 +1,26 @@
+get date:
+Tali:
+https://ais.usvisa-info.com/he-il/niv/schedule/44137564/appointment/days/97.json?appointments[expedite]=false
+
+another one in afik's user:
+https://ais.usvisa-info.com/he-il/niv/schedule/44137153/appointment/days/97.json?appointments[expedite]=false
+Not working when logged out
+
+Amit genkin:
+works for both 96 and 97 json files
+https://ais.usvisa-info.com/he-il/niv/schedule/30616879/appointment/days/97.json?appointments[expedite]=false
+
+roee shabtai (renew visa):
+https://ais.usvisa-info.com/he-il/niv/schedule/44819187/appointment/days/96.json?appointments[expedite]=false
+
+Notes:
+- Not working when logged out
+- 96 json name for Tel Aviv, 97 for Jerusalem 
+- Same ID for user (not changing)
+- The request as I understand it: https://ais.usvisa-info.com/he-il/niv/schedule/<user_id>/appointment/days/<96=tlv,97=jrs>.json?appointments[expedite]=false
+- The endpoint protected with nginx 429 too many request
+- session cookie called _yatri_session
+
+Questions:
+- Not sure once in how long it refresh dates (feels pretty static)
+- Not sure for how long the login session is alive
