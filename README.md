@@ -7,8 +7,8 @@ Usage Guide:
 This tool know to run on both Desktop and Containerized mode.
 
 Desktop mode:
-'''
+’’’
 pip install -r requirements
 python3 ./app.py
 Enter requested parameters
-'''
+’’’
