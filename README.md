@@ -16,5 +16,5 @@ Enter requested parameters
 Containerized mode:
 ```
 docker build -t <image-name> .
-docker run -it <image-name> -e 
+docker run -it <image-name> -e email=<account-email>,password=<account-password>,accepted_location<Tel Aviv/Jerusalem>,runon=<all/username>
 ```
