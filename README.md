@@ -6,14 +6,14 @@ NOTICE: The use in under responsability of the user - irresponsible usage might 
 ## Usage Guide:  
 This tool able to run on both Desktop and Containerized mode.
 
-###Desktop mode:
+### Desktop mode:
 ```
 pip install -r requirements
 python3 ./app.py
 Enter requested parameters
 ```
 
-###Containerized mode:
+### Containerized mode:
 ```
 docker build -t <image-name> .
 docker run -it <image-name> -e email=<account-email>,password=<account-password>,accepted_location<Tel Aviv/Jerusalem>,runon=<all/username>
