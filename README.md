@@ -1,7 +1,7 @@
 # Advance USA Visa Appointment
 
 A tool that helps to advance an appintment to USA-visa in Israel by performing human like operations on the site.  
-**Important:** The use in under responsability of the user - irresponsible usage might block your account.
+**Important:** For educational purpose only. The use in under responsability of the user - irresponsible usage might block your account.
 
 ## Usage Guide:  
 This tool able to run on both Desktop and Containerized mode.
